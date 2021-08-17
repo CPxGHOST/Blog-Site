@@ -1,0 +1,11 @@
+.card{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+.buttons{
+    display:grid;
+    grid-template-columns: repeat(3 , 1fr);
+    grid-gap: 3rem;
+    
+}
