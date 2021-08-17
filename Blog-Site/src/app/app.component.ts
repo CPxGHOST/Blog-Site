@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'bs-root',
+  selector: 'bg-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
