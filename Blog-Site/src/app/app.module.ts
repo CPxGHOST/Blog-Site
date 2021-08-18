@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { AddBlogComponent } from './add-blog/add-blog.component';
 
 import { AppComponent } from './app.component';
 import { BlogCardComponent } from './blog-cards/blog-card.component';
@@ -9,10 +11,12 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   declarations: [
     AppComponent,
     NavBarComponent,
-    BlogCardComponent
+    BlogCardComponent,
+    AddBlogComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [NavBarComponent , AppComponent]

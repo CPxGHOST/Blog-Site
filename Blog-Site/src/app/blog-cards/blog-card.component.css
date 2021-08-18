@@ -1,11 +1,17 @@
-.card{
+.cards{
     width: 80%;
     margin: auto;
+}
+.cards>button{
+    margin-bottom: 2rem;
+    font-weight: 800;
+}
+.card{
+    
     margin-bottom: 2rem;
 }
 .buttons{
     display:grid;
     grid-template-columns: repeat(3 , 1fr);
     grid-gap: 3rem;
-    
 }

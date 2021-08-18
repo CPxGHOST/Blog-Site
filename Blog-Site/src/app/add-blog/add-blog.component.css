@@ -1,0 +1,11 @@
+.form-class{
+    background-color: #fff;
+    width: 80%;
+    margin: auto;
+}
+.buttons{
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 2rem;
+}
