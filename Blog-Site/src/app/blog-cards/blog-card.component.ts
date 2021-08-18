@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { IBlog } from "src/models/blog";
+import { DataService } from "../data/data-service.component";
 
 @Component({
     selector: 'bg-blogCard',
@@ -7,43 +8,14 @@ import { IBlog } from "src/models/blog";
     styleUrls: ['./blog-card.component.css']
 })
 
-export class BlogCardComponent{
-    blogs: IBlog[] = [
-        {
-            "blogId": 1,
-            "blogTitle" : "Blog 1",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 1"
-        },
-        {
-            "blogId": 2,
-            "blogTitle" : "Blog 2",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 2"
-        },
-        {
-            "blogId": 3,
-            "blogTitle" : "Blog 3",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 3"
-        },
-        {
-            "blogId": 4,
-            "blogTitle" : "Blog 4",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 4"
-        },
-        {
-            "blogId": 5,
-            "blogTitle" : "Blog 5",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 5"
-        },
-        {
-            "blogId": 6,
-            "blogTitle" : "Blog 6",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 6"
-        },
-    ]
+export class BlogCardComponent implements OnInit{
+    ngOnInit(): void {
+        this.blogs = this.dataService.GetAllBlogs();
+    }
+
+    constructor(private dataService : DataService){
+    }
+
+    blogs: IBlog[] = [];       
+    
 }

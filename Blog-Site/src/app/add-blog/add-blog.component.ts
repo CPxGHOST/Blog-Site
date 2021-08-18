@@ -1,4 +1,6 @@
-import { Component } from "@angular/core";
+import { Input, Output } from "@angular/core";
+import { Component, EventEmitter} from "@angular/core";
+import { IBlog } from "src/models/blog";
 
 @Component({
     selector: 'bg-addBlog',
@@ -11,8 +13,11 @@ export class AddBlogComponent{
     blogCategory: string = '';
     blogContent: string = '';
 
+    
+
     func() : void{
         console.log('Hello');
     }
+
 
 }
