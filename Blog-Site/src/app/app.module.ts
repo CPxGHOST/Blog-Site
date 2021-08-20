@@ -2,23 +2,33 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AddBlogComponent } from './add-blog/add-blog.component';
+import {HttpClientModule} from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { BlogCardComponent } from './blog-cards/blog-card.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { RouterModule } from '@angular/router';
+import { ViewBlogComponent } from './view-blog/view-blog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent,
     BlogCardComponent,
-    AddBlogComponent
+    AddBlogComponent,
+    ViewBlogComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot([
+      {path: 'AllBlogs', component: BlogCardComponent},
+      {path: '' , component: BlogCardComponent},
+      {path: 'AddBlog' , component: AddBlogComponent},
+      {path: 'ViewBlog/:id' , component: ViewBlogComponent      }
+    ])
+    
   ],
   providers: [],
-  bootstrap: [NavBarComponent , AppComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

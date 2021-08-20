@@ -1,48 +1,38 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable, throwError } from "rxjs";
+import {tap , catchError} from 'rxjs/operators'
 import { IBlog } from "src/models/blog";
 
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
     providedIn: 'root'
 })
 export class DataService{
+  
+    private dataUrl = 'api/data/blogs.json'
+    constructor(private http : HttpClient){}
 
-    GetAllBlogs(): IBlog[]{
-        return [{
-            "blogId": 1,
-            "blogTitle" : "Blog 1",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 1"
-        },
-        {
-            "blogId": 2,
-            "blogTitle" : "Blog 2",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 2"
-        },
-        {
-            "blogId": 3,
-            "blogTitle" : "Blog 3",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 3"
-        },
-        {
-            "blogId": 4,
-            "blogTitle" : "Blog 4",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 4"
-        },
-        {
-            "blogId": 5,
-            "blogTitle" : "Blog 5",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 5"
-        },
-        {
-            "blogId": 6,
-            "blogTitle" : "Blog 6",
-            "blogCategory" : "Technology",
-            "blogContent": "This is Blog 6"
-        }];
+    GetAllBlogs(): Observable<IBlog[]>{
+        return this.http.get<IBlog[]>(this.dataUrl).pipe(
+            tap(data=> console.log('All',JSON.stringify(data))),
+            catchError(this.handleError)
+        );
+    }
+
+    // AddBlog(blog: IBlog) : Observable<object>{
+    //    let body = JSON.stringify(blog);
+    //    this.http.post(this.dataUrl , body , httpOptions).pipe(
+    //        tap(data=>)
+    //    )
+    // }
+
+
+    private handleError(err : HttpErrorResponse){
+        console.log(err);
+        return throwError(err);
     }
 
 }
