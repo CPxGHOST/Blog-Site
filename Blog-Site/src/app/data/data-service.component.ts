@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import {tap , catchError} from 'rxjs/operators'
 import { IBlog } from "src/models/blog";
+import { BlogInterface } from "src/models/IBlog";
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,23 +13,23 @@ const httpOptions = {
 })
 export class DataService{
   
-    private dataUrl = 'api/data/blogs.json'
+    private dataUrl = 'api/data/blogs.json';
+    private dummyUrl = 'http://localhost:3000/blogs/'
     constructor(private http : HttpClient){}
 
-    GetAllBlogs(): Observable<IBlog[]>{
-        return this.http.get<IBlog[]>(this.dataUrl).pipe(
-            tap(data=> console.log('All',JSON.stringify(data))),
-            catchError(this.handleError)
-        );
+    selectedBlog!: BlogInterface;
+
+    GetAllBlogs() {
+     return this.http.get(this.dummyUrl);
     }
 
-    // AddBlog(blog: IBlog) : Observable<object>{
-    //    let body = JSON.stringify(blog);
-    //    this.http.post(this.dataUrl , body , httpOptions).pipe(
-    //        tap(data=>)
-    //    )
-    // }
+    AddBlog(blog : BlogInterface){
+       return this.http.post(this.dummyUrl , blog); 
+    }
 
+    DummyFunction() {
+       return this.http.get(this.dummyUrl);
+    }
 
     private handleError(err : HttpErrorResponse){
         console.log(err);

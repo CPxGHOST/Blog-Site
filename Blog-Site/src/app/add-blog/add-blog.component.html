@@ -1,20 +1,14 @@
-    <div class="form-class">
+      <form [formGroup] = "form" (ngSubmit) = "onSubmit()" class="form">
+          <div class="mb-3">
+          <input class="form-control" type="text" formControlName="title" placeholder="Enter Title" required>
+        </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Title</label>
-            <input type="text"  [(ngModel)] = 'blog.blogTitle'  class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Blog Category</label>
-            <input type="text" class="form-control" [(ngModel)] = 'blog.blogCategory'>
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Blog Content</label>
-            <textarea class="form-control" rows="8" [(ngModel)] = 'blog.blogContent'></textarea>
-          </div>
-          <div class="buttons">
-            <button class="btn btn-primary" (click) = 'getBlogId()'>Save Blog</button>
-            <a routerLink = '/' class="btn btn-danger">Cancel</a>
-          </div>
-         
-     </div>
-    
+          <input class="form-control" type="text" formControlName="category" placeholder="Enter Category" required>
+        </div>
+         <div class="mb-3">
+          <textarea class="form-control" placeholder="Content" formControlName="content" required></textarea>
+          <label for="floatingTextarea2"></label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a (click) = 'onBack()' class="btn btn-danger">Cancel</a>
+      </form>

@@ -1,31 +1,34 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { IBlog } from "src/models/blog";
+import { BlogInterface } from "src/models/IBlog";
 import { DataService } from "../data/data-service.component";
 
 @Component({
-    // selector: 'bg-blogCard',
     templateUrl: './blog-card.component.html',
     styleUrls: ['./blog-card.component.css']
 })
 
-export class BlogCardComponent implements OnInit , OnDestroy{
-    blogs: IBlog[] = []; 
+export class BlogCardComponent implements OnInit{
+    
+    blogs: BlogInterface[] = []; 
     subscription!: Subscription;
+    data: any;
 
-    ngOnInit(): void {
-        this.subscription = this.dataService.GetAllBlogs().subscribe({
-            next: blogs => this.blogs = blogs,
-            error: err => console.log(err)
-        });
+    constructor(private dataService : DataService , private router: Router){  }
+
+     ngOnInit(): void {
+        this.dataService.GetAllBlogs().subscribe(
+            (blogs) => {this.data = blogs;
+                console.log(this.data.length);  
+                this.blogs = this.data;
+            }
+        ); 
     }
 
-    constructor(private dataService : DataService){
-    }
-    ngOnDestroy(): void {
-        this.subscription.unsubscribe();
-    }
-
-          
+     moveToAddBlog(){
+        this.router.navigate(['/AddBlog']);
+    }      
     
 }

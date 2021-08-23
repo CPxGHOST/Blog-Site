@@ -1,14 +1,14 @@
 <div class="cards">
-  <a routerLink='/AddBlog' class="btn btn-primary" style="margin-bottom: 1rem;">Add Blog</a>
+  <a routerLink='/AddBlog' class="btn btn-primary" style="margin-bottom: 1rem;" (click) = 'moveToAddBlog()'>Add Blog</a>
   <div class="card" *ngFor='let blog of blogs'>
     <div class="card-header">
-      {{blog.blogCategory}}
+     {{blog.category}}
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{blog.blogTitle}}</h5>
-      <p class="card-text">{{blog.blogContent}}</p>
+      <h5 class="card-title">{{blog.title}}</h5>
+      <p class="card-text">{{blog.content}}</p>
       <div class="buttons">
-        <a routerLink='/ViewBlog/{{blog.blogId}}' class="btn btn-success">View Blog</a>
+        <a [routerLink] = "['/ViewBlog',blog._id]"  class="btn btn-success">View Blog</a>
         <a routerLink='/' class="btn btn-primary">Edit</a>
         <a routerLink="/" class="btn btn-danger">Delete</a>
       </div>

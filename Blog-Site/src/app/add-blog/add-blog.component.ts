@@ -1,5 +1,7 @@
-import { Input, OnDestroy, Output } from "@angular/core";
+import { Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { Component, EventEmitter} from "@angular/core";
+import { FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 
 import { IBlog } from "src/models/blog";
@@ -10,45 +12,37 @@ import { DataService } from "../data/data-service.component";
     styleUrls: ['./add-blog.component.css']
 })
 
-export class AddBlogComponent{
+export class AddBlogComponent implements OnInit{
     
-    constructor(private dataService : DataService){}
+    form! : FormGroup;
+    constructor(public dataService : DataService , private router: Router , private formBuilder: FormBuilder){}
    
-    // subscription!: Subscription;
-
-    // ngOnDestroy(): void {
-    //    this.subscription.unsubscribe();
-    // }
-    
-    blogs!: IBlog[];
-    blog: IBlog = {
-        blogId: -1,
-        blogTitle: '',
-        blogContent: '',
-        blogCategory: ''
-    }; 
-
-    
-    addBlog() : void{
-    //   this.subscription = this.dataService.AddBlog(this.blog).subscribe({
-    //     next: data => console.log(data),
-    //     error: err => console.log(err)
-    //   });
-    }  
-
-    getBlogId(): void{  
-       let id : number = -1;
-       this.dataService.GetAllBlogs().subscribe({
-            next: blogs => {
-                this.blogs = blogs;
-                this.blog.blogId = this.blogs[this.blogs.length-1].blogId+1;
-                this.addBlog();
-            },
-            error: err => console.log(err)
+    ngOnInit(): void {
+        this.form = this.formBuilder.group({
+            _id: [''],
+            title: ['' , Validators.required],
+            category: ['', Validators.required],
+            content: ['', Validators.required]
         });
+    }
+      
+    onSubmit(){
+      if(this.form.valid){
+          this.dataService.AddBlog(this.form.value).subscribe(
+              (res) => {
+                  alert('Blog saved!');
+                  this.router.navigate(['/AllBlogs']);
+              },
+              err => {
+                  console.log(err);
+              }
+          )
+      }
+    }
 
-        
-       
+   
+    onBack(): void{
+        this.router.navigate(['/']);
     }
 
 }

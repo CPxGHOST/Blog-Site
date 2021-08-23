@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AddBlogComponent } from './add-blog/add-blog.component';
 import {HttpClientModule} from '@angular/common/http'
@@ -20,6 +20,7 @@ import { ViewBlogComponent } from './view-blog/view-blog.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {path: 'AllBlogs', component: BlogCardComponent},
       {path: '' , component: BlogCardComponent},

@@ -9,3 +9,6 @@
     grid-template-columns: repeat(2,1fr);
     grid-gap: 2rem;
 }
+form>a{
+    margin-left: 1rem;
+}
