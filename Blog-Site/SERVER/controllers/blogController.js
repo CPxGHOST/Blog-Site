@@ -57,7 +57,7 @@ blogRouter.route('/:id').put(urlencodedParser, (req , res) => {
 
     Blog.findByIdAndUpdate(id , {title: title, content: content, category: category})
         .then((result) => {
-            res.redirect('/');          
+            res.send(result);   
         })
         .catch((err) => {
             console.log(err);
@@ -67,8 +67,8 @@ blogRouter.route('/:id').put(urlencodedParser, (req , res) => {
 // Delete blog
 blogRouter.route('/:id').delete((req , res) => {
     Blog.findByIdAndDelete(req.params.id)
-        .then(() => {
-            console.log('Deleted');
+        .then((result) => {
+            res.send(result);
         })
         .catch(err => {
             console.log(err);

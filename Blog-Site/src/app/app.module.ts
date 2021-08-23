@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { BlogCardComponent } from './blog-cards/blog-card.component';
 import { RouterModule } from '@angular/router';
 import { ViewBlogComponent } from './view-blog/view-blog.component';
+import { EditBlogComponent } from './edit-blog/edit-blog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BlogCardComponent,
     AddBlogComponent,
-    ViewBlogComponent
+    ViewBlogComponent,
+    EditBlogComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { ViewBlogComponent } from './view-blog/view-blog.component';
       {path: 'AllBlogs', component: BlogCardComponent},
       {path: '' , component: BlogCardComponent},
       {path: 'AddBlog' , component: AddBlogComponent},
-      {path: 'ViewBlog/:id' , component: ViewBlogComponent      }
+      {path: 'ViewBlog/:id' , component: ViewBlogComponent},
+      {path: 'EditBlog/:id', component: EditBlogComponent}
     ])
     
   ],

@@ -31,4 +31,11 @@ export class BlogCardComponent implements OnInit{
         this.router.navigate(['/AddBlog']);
     }      
     
+    deleteBlog(id: string){
+        this.dataService.DeleteBlog(id).subscribe(
+            () => {
+                window.location.reload();
+            }
+        );
+    }
 }

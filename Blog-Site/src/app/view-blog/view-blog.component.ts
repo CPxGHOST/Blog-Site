@@ -1,5 +1,8 @@
+import { getLocaleNumberFormat } from "@angular/common";
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router, RouterLinkWithHref } from "@angular/router";
+import { BlogInterface } from "src/models/IBlog";
+import { DataService } from "../data/data-service.component";
 
 @Component({
     templateUrl: './view-blog.component.html',
@@ -9,12 +12,24 @@ import { ActivatedRoute } from "@angular/router";
 export class ViewBlogComponent implements OnInit{
 
     pageTitle: string = '';
+    blog!: any;
+    pageContent: string = '';
 
-    constructor(private route: ActivatedRoute){}
+    constructor(private route: ActivatedRoute , private dataService: DataService , private router: Router){}
         
     ngOnInit(): void {
-        const id = Number(this.route.snapshot.paramMap.get('id'));
-        this.pageTitle += id; 
+        let id = String(this.route.snapshot.paramMap.get('id'));
+        this.dataService.GetBlogById(id).subscribe(
+            (res) => {
+                this.blog = res;
+                this.pageTitle = this.blog.title;
+                this.pageContent = this.blog.content;
+            }
+        );
+    }
+    
+    onBack(): void{
+        this.router.navigate(['/']);
     }
 
 }

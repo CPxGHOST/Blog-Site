@@ -13,27 +13,34 @@ const httpOptions = {
 })
 export class DataService{
   
-    private dataUrl = 'api/data/blogs.json';
-    private dummyUrl = 'http://localhost:3000/blogs/'
+    private dataUrl = 'http://localhost:3000/blogs/'
     constructor(private http : HttpClient){}
 
     selectedBlog!: BlogInterface;
 
     GetAllBlogs() {
-     return this.http.get(this.dummyUrl);
+     return this.http.get(this.dataUrl);
     }
 
     AddBlog(blog : BlogInterface){
-       return this.http.post(this.dummyUrl , blog); 
+       return this.http.post(this.dataUrl , blog); 
     }
 
     DummyFunction() {
-       return this.http.get(this.dummyUrl);
+       return this.http.get(this.dataUrl);
     }
 
-    private handleError(err : HttpErrorResponse){
-        console.log(err);
-        return throwError(err);
+    GetBlogById(id: string){
+        return this.http.get(`${this.dataUrl}/${id}`);
     }
+
+    EditBlog(updatedBlog: BlogInterface){
+      return this.http.put(`${this.dataUrl}/${updatedBlog._id}`,updatedBlog);
+    }
+
+    DeleteBlog(id: string){
+     return this.http.delete(`${this.dataUrl}/${id}`);
+    }
+    
 
 }

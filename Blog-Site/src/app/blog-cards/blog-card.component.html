@@ -8,9 +8,9 @@
       <h5 class="card-title">{{blog.title}}</h5>
       <p class="card-text">{{blog.content}}</p>
       <div class="buttons">
-        <a [routerLink] = "['/ViewBlog',blog._id]"  class="btn btn-success">View Blog</a>
-        <a routerLink='/' class="btn btn-primary">Edit</a>
-        <a routerLink="/" class="btn btn-danger">Delete</a>
+        <a [routerLink] = "['/ViewBlog',blog._id]" class="btn btn-success">View Blog</a>
+        <a [routerLink] = "['/EditBlog',blog._id]" class="btn btn-primary">Edit</a>
+        <a (click) = "deleteBlog(blog._id)" class="btn btn-danger">Delete</a>
       </div>
     </div>
   </div>
