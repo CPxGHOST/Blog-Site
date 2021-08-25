@@ -18,15 +18,12 @@ export class EditBlogComponent implements OnInit {
     let id = String(this.route.snapshot.paramMap.get('id'));
     this.dataService.GetBlogById(id).subscribe(
       (res) => {
-        this.oldBlog = res;
         this.form = this.formBuilder.group({
-          _id: this.oldBlog._id,
-          title: this.oldBlog.title,
-          category: this.oldBlog.category,
-          content: this.oldBlog.content
-  
+          _id: res._id,
+          title: res.title,
+          category: res.category,
+          content: res.content
         })
-        
       }
   );
   }
@@ -35,6 +32,7 @@ export class EditBlogComponent implements OnInit {
     if(this.form.valid){
         this.dataService.EditBlog(this.form.value).subscribe(
             (res) => {
+                
                 alert('Blog saved!');
                 this.router.navigate(['/AllBlogs']);
             },

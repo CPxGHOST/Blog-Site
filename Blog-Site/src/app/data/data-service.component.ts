@@ -18,20 +18,16 @@ export class DataService{
 
     selectedBlog!: BlogInterface;
 
-    GetAllBlogs() {
-     return this.http.get(this.dataUrl);
+    GetAllBlogs() : Observable<BlogInterface[]> {
+     return this.http.get<BlogInterface[]>(this.dataUrl);
     }
 
     AddBlog(blog : BlogInterface){
        return this.http.post(this.dataUrl , blog); 
     }
 
-    DummyFunction() {
-       return this.http.get(this.dataUrl);
-    }
-
-    GetBlogById(id: string){
-        return this.http.get(`${this.dataUrl}/${id}`);
+    GetBlogById(id: string) : Observable<BlogInterface>{
+        return this.http.get<BlogInterface>(`${this.dataUrl}/${id}`);
     }
 
     EditBlog(updatedBlog: BlogInterface){

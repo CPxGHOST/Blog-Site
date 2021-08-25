@@ -32,10 +32,19 @@ export class BlogCardComponent implements OnInit{
     }      
     
     deleteBlog(id: string){
-        this.dataService.DeleteBlog(id).subscribe(
-            () => {
-                window.location.reload();
+        this.dataService.GetBlogById(id).subscribe(
+            (res) => {
+                if(confirm(`Are you sure you want to delete blog: ${res.title}?`)){
+                    this.dataService.DeleteBlog(id).subscribe(
+                        () => {
+                            window.location.reload();
+                        }
+                    );   
+                }
+
             }
         );
+       
+        
     }
 }

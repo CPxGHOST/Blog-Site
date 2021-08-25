@@ -14,30 +14,45 @@ import { DataService } from "../data/data-service.component";
 
 export class AddBlogComponent implements OnInit{
     
-    form! : FormGroup;
-    constructor(public dataService : DataService , private router: Router , private formBuilder: FormBuilder){}
+    constructor(public dataService : DataService , private router: Router){}
    
     ngOnInit(): void {
-        this.form = this.formBuilder.group({
-            _id: [''],
-            title: ['' , Validators.required],
-            category: ['', Validators.required],
-            content: ['', Validators.required]
-        });
+        // this.form = this.formBuilder.group({
+        //     _id: [''],
+        //     title: ['' , Validators.required],
+        //     category: ['', Validators.required],
+        //     content: ['', Validators.required]
+        // });
     }
       
-    onSubmit(){
-      if(this.form.valid){
-          this.dataService.AddBlog(this.form.value).subscribe(
-              (res) => {
-                  alert('Blog saved!');
-                  this.router.navigate(['/AllBlogs']);
-              },
-              err => {
-                  console.log(err);
-              }
-          )
-      }
+    // onSubmit(){
+    //   if(this.form.valid){
+    //       this.dataService.AddBlog(this.form.value).subscribe(
+    //           (res) => {
+    //               alert('Blog saved!');
+    //               this.router.navigate(['/AllBlogs']);
+    //           },
+    //           err => {
+    //               console.log(err);
+    //           }
+    //       )
+    //   }
+    // }
+
+    onSubmit2(signInForm: NgForm){
+        if(signInForm.valid){
+            console.log(signInForm.value);   
+            this.dataService.AddBlog(signInForm.value).subscribe(
+                (res) => {
+                    alert('Blog saved!');
+                    this.router.navigate(['/AllBlogs']);
+                },
+                err => {
+                    console.log(err);
+                }
+           )   
+  
+        }
     }
 
    

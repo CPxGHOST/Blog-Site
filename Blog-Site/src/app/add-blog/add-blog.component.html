@@ -1,4 +1,4 @@
-      <form [formGroup] = "form" (ngSubmit) = "onSubmit()" class="form">
+      <!-- <form [formGroup] = "form" (ngSubmit) = "onSubmit()" class="form">
           <div class="mb-3">
           <input class="form-control" type="text" formControlName="title" placeholder="Enter Title" required>
         </div>
@@ -11,4 +11,20 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
         <a (click) = 'onBack()' class="btn btn-danger">Cancel</a>
-      </form>
+      </form> -->
+
+      <form #signInForm="ngForm" (ngSubmit) = "onSubmit2(signInForm)" class="form">
+        <input type="hidden" name="_id" ngModel>
+        <div class="mb-3">
+        <input class="form-control" type="text" placeholder="Enter Title" name="title" ngModel required>
+      </div>
+      <div class="mb-3">
+        <input class="form-control" type="text" name="category" placeholder="Enter Category" ngModel required>
+      </div>
+       <div class="mb-3">
+        <textarea class="form-control" name="content" placeholder="Enter Content" ngModel required></textarea>
+        <label for="floatingTextarea2"></label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a (click) = 'onBack()' class="btn btn-danger">Cancel</a>
+    </form>
